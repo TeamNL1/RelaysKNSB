@@ -1,8 +1,15 @@
 import socket
+import argparse
 
 def main():
-    host = '127.0.0.1'  # IP address to bind the server
-    port = 5000         # Port to listen on
+    
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--host", type=str, default="127.0.0.1", help="host IP address")
+    parser.add_argument("--port", type=int, default=5000, help="host port")
+    args = parser.parse_args()
+    
+    host = args.host  # IP address to bind the server
+    port = args.port  # Port to listen on
 
     # Create a socket
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

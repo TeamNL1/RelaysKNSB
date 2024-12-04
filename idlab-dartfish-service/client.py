@@ -1,9 +1,18 @@
 import socket
 import json
+import argparse
+
+
 
 def main():
-    host = '127.0.0.1'  # Server's IP address
-    port = 5000         # Port used by the server
+    
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--host", type=str, default="127.0.0.1", help="host IP address")
+    parser.add_argument("--port", type=int, default=5000, help="host port")
+    args = parser.parse_args()
+
+    host = args.host  # Server's IP address
+    port = args.port  # Port used by the server
 
     # Create a socket
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

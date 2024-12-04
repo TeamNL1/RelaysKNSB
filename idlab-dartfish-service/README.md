@@ -7,16 +7,20 @@ The events sent by the client will therefore create a event in the Dartfish Live
 
 ## Usage
 
-First start the server using the command below. Note that this application communicates over port 5000.
+First start the server using the command below. The default ip address is 127.0.0.1 (localhost) and the default port is 5000.
 
 ```bash
-python server.py
+python ./server.py
+
+python ./server.py --host 10.10.135.212 --port 5000
 ```
 
 Then start the client 
 
 ```bash
-python client.py
+python ./client.py
+
+python ./client.py --host 10.10.135.212 --port 5000
 ```
 
 Whatever is sent by the client will be sent back by the server upon arrival.
