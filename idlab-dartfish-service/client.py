@@ -22,8 +22,18 @@ def main():
 
         # Prepare a JSON message
         message = {
-            "type": "greeting",
-            "content": "Hello from Python!"
+            "type": "relay_exchange",
+            "pushing-athlete" : "John Doe",
+            "incoming-athlete" : "Jane Doe",
+            "corner" : 1,
+            #"relay-number" : "1:2",
+            "timestamp" : 1733318347197,
+            "metrics" : {
+                "acceleration-incoming-athlete" : "2.3 m/s2",
+                "desceleration-pushing-athlete" : "2.3 m/s2",
+                "speed-difference-before-push" : "3 km/h"
+            },
+            "description" : "free text"
         }
         json_message = json.dumps(message)
 
