@@ -1,14 +1,21 @@
 import socket
 import json
 import argparse
+import random
+import time 
+import argparse
 
-
+athletes = ["Berber", "Martijn", "Quint", "Maarten", "Carmen"]
+corners = ["Zamboni corner", "Long Track corner"]
 
 def main():
     
     parser = argparse.ArgumentParser()
     parser.add_argument("--host", type=str, default="127.0.0.1", help="host IP address")
     parser.add_argument("--port", type=int, default=5000, help="host port")
+    parser.add_argument("--type", default="relay_exchange", help="start_recording|stop_recording|relay_exchange", type=str)
+
+    
     args = parser.parse_args()
 
     host = args.host  # Server's IP address
@@ -19,22 +26,27 @@ def main():
     try:
         # Connect to the server
         client_socket.connect((host, port))
-
-        # Prepare a JSON message
-        message = {
-            "type": "relay_exchange",
-            "pushing-athlete" : "John Doe",
-            "incoming-athlete" : "Jane Doe",
-            "corner" : 1,
-            #"relay-number" : "1:2",
-            "timestamp" : 1733318347197,
-            "metrics" : {
-                "acceleration-incoming-athlete" : "2.3 m/s2",
-                "desceleration-pushing-athlete" : "2.3 m/s2",
-                "speed-difference-before-push" : "3 km/h"
-            },
-            "description" : "free text"
-        }
+        
+        if args.type == "relay_exchange":
+            # Prepare a JSON message
+            message = {
+                "type": "relay_exchange",
+                "pushing-athlete" : random.choice(athletes),
+                "incoming-athlete" : random.choice(athletes),
+                "corner" : random.choice(corners),
+                "timestamp" : round(time.time()*1000),
+                "metrics" : {
+                    "acceleration-incoming-athlete" : random.randint(0,30)/10,
+                    "desceleration-pushing-athlete" : random.randint(0,30)/10,
+                    "speed-difference-before-push" : random.randint(0,30)/10
+                }
+            }
+        elif args.type in ["start_recording", "stop_recording"]:
+            message = {
+                "type" : args.type
+            }
+        else:
+            raise Exception(f"type {args.type} not supported")
         json_message = json.dumps(message)
 
         # Send the message
