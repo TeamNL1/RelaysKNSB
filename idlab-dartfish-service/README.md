@@ -38,11 +38,12 @@ The basics for each relay exchange event should contain a number of mandatory fi
 | type                            | relay_exchange                                          |
 | pushing-athlete                 | name of the athlete that is pushing the other athlete   |
 | incoming athlete                | name of the athlete that received the push              |
-| corner                          | 1 = first corner after the finish line, 2 other corner  |
+| corner                          | Zamboni or Long Track                                   |
 | timestamp                       | unix epoch in milliseconds since Jan 1st, 1970          |
 | metrics                         | obeject containing all metrics/evaluations of the push  |
 | - acceleration-incoming-athlete | acceleration expressed in m/s^2                         | 
-| - desceleration-pushing-athlete | desceleration expressed in m/s^2                        |            
+| - desceleration-pushing-athlete | desceleration expressed in m/s^2                        |
+| - speed-difference-before-push  | speed difference expressed in km/h                      |           
 
 Please extend upon this to complete the list of metrics
 
@@ -52,12 +53,12 @@ Please extend upon this to complete the list of metrics
     "type" : "relay_exchange",
     "pushing-athlete" : "John Doe",
     "incoming-athlete" : "Jane Doe",
-    "corner" : 1,
+    "corner" : "Zamboni",
     "timestamp" : 1733318347197,
     "metrics" : {
-        "acceleration-incoming-athlete" : 5.3,
+        "acceleration-incoming-athlete" : 3.3,
         "desceleration-pushing-athlete" : 2.3,
-        
+        "speed-difference-before-push" : 1.2        
     }
 }
 ```
