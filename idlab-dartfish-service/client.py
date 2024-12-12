@@ -52,6 +52,10 @@ def main():
         # Send the message
         client_socket.sendall(json_message.encode('utf-8'))
         print("Message sent!")
+        
+        # Send the message
+        client_socket.sendall(json_message.encode('utf-8'))
+        print("Message sent!")
 
         # Receive a response
         response = client_socket.recv(1024)
